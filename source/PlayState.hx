@@ -1876,10 +1876,20 @@ class PlayState extends MusicBeatState
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
+				
+			var creditTxt = new FlxText(876, 648, 348);
+     creditTxt.text = "PORTED BY\nFNF BR";
+    creditTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+    creditTxt.scrollFactor.set();
+    add(creditTxt);	
+				
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+		if(ClientPrefs.downScroll) {
+			creditTxt.y = 148;
+		}		
 		// create the custom hud
 		trace(curSong.toLowerCase());
 		if(hudStyle.exists(curSong.toLowerCase())){
@@ -2047,8 +2057,8 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
+		creditTxt.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
-
 		startCircle.cameras = [camOther];
 		startText.cameras = [camOther];
 		blackFuck.cameras = [camOther];
@@ -2056,6 +2066,11 @@ class PlayState extends MusicBeatState
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
 
+	        #if android
+		addAndroidControls();
+		androidControls.visible = true;
+		#end
+			
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
